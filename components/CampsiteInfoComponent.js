@@ -15,7 +15,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     postFavorite: campsiteId => (postFavorite(campsiteId)),
-    postComment: campsiteId => (postComment(campsiteId, rating, author, text))
+    postComment: (campsiteId, rating, author, text) => (postComment(campsiteId, rating, author, text))
 };
 
 function RenderCampsite(props) {
@@ -38,7 +38,7 @@ function RenderCampsite(props) {
                         raised
                         reverse
                         onPress={() => props.favorite ?
-                            console.log('Already set as a   favorite') : props.   markFavorite()}
+                            console.log('Already set as a favorite') : props.markFavorite()}
                     />
                     <Icon
                         style={styles.cardItem}
@@ -47,7 +47,7 @@ function RenderCampsite(props) {
                         color='#5637DD'
                         raised
                         reverse
-                        onPress={() => props.onShowModal()  }
+                        onPress={() => props.onShowModal()}
                     />
                 </View>
             </Card>
@@ -113,14 +113,13 @@ class CampsiteInfo extends Component {
     }
 
     handleComment(campsiteId) {
-        postComment(campsiteId, this.state.rating, this.state.author, this.state.text);
+        const { rating, author, text } = this.state;
+        this.props.postComment(campsiteId, rating, author, text);
         this.toggleModal();
     }
 
     resetForm() {
         this.setState({
-            favorite: false,
-            showModal: false,
             rating: 5,
             author: '',
             text: ''
@@ -156,14 +155,14 @@ class CampsiteInfo extends Component {
                             placeholder='Author'
                             leftIcon={{ type: 'font-awesome', name: 'user-o' }}
                             leftIconContainerStyle={{paddingRight: 10}}
-                            onChangeText={(value) => this.setState({    author: value})}
+                            onChangeText={author => this.setState({author: author})}
                             value={this.state.author}
                         />
                         <Input
                             placeholder='Comment'
                             leftIcon={{ type: 'font-awesome', name: 'comment-o' }}
                             leftIconContainerStyle={{ paddingRight: 10 }}
-                            onChangeText={(value) => this.setState({ text: value })}
+                            onChangeText={text => this.setState({ text: text })}
                             value={this.state.text}
                         />
                         <View style={{ margin: 10 }}>
