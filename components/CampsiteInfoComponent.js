@@ -170,7 +170,7 @@ class CampsiteInfo extends Component {
                                 title='Submit'
                                 color='#5637DD'
                                 onPress={() => {
-                                this.handleComment();
+                                this.handleComment(campsiteId);
                                 this.resetForm();
                                 }}
                             />
