@@ -57,7 +57,7 @@ class Favorites extends Component {
                         <ListItem
                             title={item.name}
                             subtitle={item.description}
-                            leftAvatar={{ source: { uri:    baseUrl + item.image } }}
+                            leftAvatar={{ source: { uri: baseUrl + item.image } }}
                             onPress={() => navigate ('CampsiteInfo', { campsiteId:   item.id })}
                         />
                     </Animatable.View>
